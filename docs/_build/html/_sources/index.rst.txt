@@ -10,6 +10,15 @@ Welcome to Numuse's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   install
+   support
+
+
+Reference Manual
+================
+
+.. automodule:: notation
+   :members:
 
 
 Indices and tables

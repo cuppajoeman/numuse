@@ -14,6 +14,7 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="install.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,7 +34,77 @@
   <div class="section" id="welcome-to-numuse-s-documentation">
 <h1>Welcome to Numuse’s documentation!<a class="headerlink" href="#welcome-to-numuse-s-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Support</a></li>
+</ul>
 </div>
+</div>
+<div class="section" id="module-notation">
+<span id="reference-manual"></span><h1>Reference Manual<a class="headerlink" href="#module-notation" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="notation.NoteCollection">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">notation.</span></span><span class="sig-name descname"><span class="pre">NoteCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">set</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notation.NoteCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>A collection of notes from a musical system</p>
+<dl class="simple">
+<dt>notes: List[int]</dt><dd><p>the notes in this note collection</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__eq__(other_NC: NoteCollection)</dt><dd><p>Checks whether this note collection is the same as the other one</p>
+</dd>
+<dt>generate_wave_function(self)</dt><dd><p>Generates the wave function determined by the current musical system
+As of right now this is assumed to be 12 tone equal temperament</p>
+</dd>
+<dt>compute_diatonic_distance(self, other_NC: NoteCollection):</dt><dd><p>Return how many notes the two note collections differ by</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="notation.NoteCollection.compute_diatonic_distance">
+<span class="sig-name descname"><span class="pre">compute_diatonic_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other_NC</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#notation.NoteCollection" title="notation.NoteCollection"><span class="pre">notation.NoteCollection</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#notation.NoteCollection.compute_diatonic_distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return how many notes the two note collections differ by</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="notation.RootedIntervalCollection">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">notation.</span></span><span class="sig-name descname"><span class="pre">RootedIntervalCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">root:</span> <span class="pre">int,</span> <span class="pre">interval_collection:</span> <span class="pre">Set[int],</span> <span class="pre">duration=0,</span> <span class="pre">musical_system=&lt;musical_system.RBMS_Approximation</span> <span class="pre">object&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#notation.RootedIntervalCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>A note collection instantiated in a special way</p>
+<p>A rooted interval collection is a way to define a
+set of notes of a musical system.</p>
+<p>It does so specifying a note (denoted by root) from the system and
+a set of intervals measured with respect to the root.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="notation.RootedIntervalCollection.generate_interval_to_occurance">
+<span class="sig-name descname"><span class="pre">generate_interval_to_occurance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#notation.RootedIntervalCollection.generate_interval_to_occurance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a dictionary that maps all possible intervals in this interval collection to the number of times it appears</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notation.RootedIntervalCollection.generate_notes">
+<span class="sig-name descname"><span class="pre">generate_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval_collection</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#notation.RootedIntervalCollection.generate_notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the notes that are defined by taking the root note and adding
+the notes in the interval collection</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notation.RootedIntervalCollection.get_fundamental_representation">
+<span class="sig-name descname"><span class="pre">get_fundamental_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#notation.RootedIntervalCollection" title="notation.RootedIntervalCollection"><span class="pre">notation.RootedIntervalCollection</span></a><a class="headerlink" href="#notation.RootedIntervalCollection.get_fundamental_representation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the fundamental representation of this interval collection</p>
+<p>The fundamental representation a rooted interval collection where the interval
+are within the range 0 … num_notes - 1 where num_notes is defined by the
+musical system we are dealing with.</p>
+<p>In 12 tone equal temperament, num_notes is equal to 12.</p>
+<dl class="simple">
+<dt>Example:</dt><dd><p>If we have a rooted interval collection 13 | -3 1 2 24</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
@@ -61,11 +132,17 @@
 
 
 <h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Support</a></li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="install.html" title="next chapter">Installation</a></li>
   </ul></li>
 </ul>
 </div>
