@@ -40,7 +40,7 @@ Notation
 Musical System
 **************
 
-.. automodule:: musical\_system
+.. automodule:: musical_system
    :members:
 
 
