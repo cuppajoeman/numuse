@@ -66,18 +66,19 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="support.html">Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="abbreviations.html">Abbreviations</a></li>
 </ul>
 </div>
 </div>
 <div class="section" id="reference-manual">
 <h1>Reference Manual<a class="headerlink" href="#reference-manual" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="abbreviations.html">Abbreviations</a></li>
-</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The pages linked to here are currently a work in progress.</p>
 </div>
-<span class="target" id="module-notation"></span><dl class="py class">
+<div class="section" id="module-notation">
+<span id="notation"></span><h2>Notation<a class="headerlink" href="#module-notation" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
 <dt class="sig sig-object py" id="notation.NoteCollection">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">notation.</span></span><span class="sig-name descname"><span class="pre">NoteCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">set</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notation.NoteCollection" title="Permalink to this definition">¶</a></dt>
 <dd><p>A collection of notes from a musical system</p>
@@ -140,6 +141,75 @@ musical system we are dealing with.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-music">
+<span id="music"></span><h2>Music<a class="headerlink" href="#module-music" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="music.Music">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">Music</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">music_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">fractions.Fraction</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#music.Music" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents notes that are played over time</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-converters">
+<span id="converters"></span><h2>Converters<a class="headerlink" href="#module-converters" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="converters.parse_RIC_shorthand">
+<span class="sig-prename descclassname"><span class="pre">converters.</span></span><span class="sig-name descname"><span class="pre">parse_RIC_shorthand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">RIC_shorthand</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#converters.parse_RIC_shorthand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts RIC shorthand to a root and set of notes</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="converters.parse_RIC_shorthand_unit">
+<span class="sig-prename descclassname"><span class="pre">converters.</span></span><span class="sig-name descname"><span class="pre">parse_RIC_shorthand_unit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">RIC_shorthand_unit</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="headerlink" href="#converters.parse_RIC_shorthand_unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a unit of RIC shorthand, we convert it to an interval</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-0">
+<span id="constants"></span><h2>Constants<a class="headerlink" href="#module-0" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-prename descclassname"><span class="pre">converters.</span></span><span class="sig-name descname"><span class="pre">parse_RIC_shorthand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">RIC_shorthand</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts RIC shorthand to a root and set of notes</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-prename descclassname"><span class="pre">converters.</span></span><span class="sig-name descname"><span class="pre">parse_RIC_shorthand_unit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">RIC_shorthand_unit</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a unit of RIC shorthand, we convert it to an interval</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools">
+<span id="tools"></span><h2>Tools<a class="headerlink" href="#module-tools" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="tools.I">
+<span class="sig-prename descclassname"><span class="pre">tools.</span></span><span class="sig-name descname"><span class="pre">I</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="headerlink" href="#tools.I" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the interval between the two notes x, y</p>
+<dl class="simple">
+<dt>x<span class="classifier">int</span></dt><dd><p>The first note</p>
+</dd>
+<dt>y<span class="classifier">int</span></dt><dd><p>The second note</p>
+</dd>
+</dl>
+<p>The interval between x and y</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tools.ranged_modulus_operator">
+<span class="sig-prename descclassname"><span class="pre">tools.</span></span><span class="sig-name descname"><span class="pre">ranged_modulus_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="headerlink" href="#tools.ranged_modulus_operator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return what x is congruent to in the range 0 … m-1</p>
+<dl class="simple">
+<dt>x<span class="classifier">int</span></dt><dd><p>The number to be analyzed</p>
+</dd>
+<dt>m<span class="classifier">int</span></dt><dd><p>The modulus</p>
+</dd>
+</dl>
+<p>The unique number from 0 to m-1 (inclusive) that x is congruent to</p>
+</dd></dl>
+
+</div>
+</div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
@@ -174,9 +244,6 @@ musical system we are dealing with.</p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="support.html">Support</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="abbreviations.html">Abbreviations</a></li>
 </ul>
 

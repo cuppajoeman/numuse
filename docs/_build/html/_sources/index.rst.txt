@@ -18,18 +18,54 @@ To get started with the notation please watch my `introductory video <https://ww
 
    install
    support
+   abbreviations
 
 
 Reference Manual
 ================
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+.. warning:: The pages linked to here are currently a work in progress.
 
-   abbreviations
+
+   
+********
+Notation
+********
 
 .. automodule:: notation
+   :members:
+
+
+*****
+Music
+*****
+
+.. automodule:: music
+   :members:
+
+
+
+**********
+Converters
+**********
+
+.. automodule:: converters
+   :members:
+
+
+*********
+Constants
+*********
+
+.. automodule:: converters
+   :members:
+
+
+*****
+Tools
+*****
+
+.. automodule:: tools
    :members:
 
 
