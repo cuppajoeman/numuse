@@ -36,6 +36,13 @@ Notation
    :members:
 
 
+**************
+Musical System
+**************
+
+.. automodule:: musical_system
+   :members:
+
 *****
 Music
 *****
