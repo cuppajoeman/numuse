@@ -10,6 +10,8 @@ Wecome to Numuse, this is a package for analyzing musical ideas and testing out 
 
 To get started with the notation please watch my `introductory video <https://www.youtube.com/watch?v=N2go7xhJ9lY>`_
 
+
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
@@ -20,6 +22,12 @@ To get started with the notation please watch my `introductory video <https://ww
 
 Reference Manual
 ================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   abbreviations
 
 .. automodule:: notation
    :members:
