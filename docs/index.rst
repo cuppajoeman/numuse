@@ -18,9 +18,18 @@ To get started with the notation please watch my `introductory video <https://ww
 
    install
    support
-   reference
    abbreviations
 
+
+Reference Manual
+================
+
+.. autosummary::
+   :toctree: _autosummary
+   :template: custom-module-template.rst
+   :recursive:
+   
+   numuse
 
 
 
