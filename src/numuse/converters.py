@@ -45,8 +45,8 @@ def parse_line_shorthand(current_time: float, line_shorthand: Tuple[str, List[Fr
     h_to_r = zip(harmonic_information, rhythm_information)
     for h, r in h_to_r:
         # If h is none, than it's a rest
-        if h is not None:
-            line.append(MusicMoment(current_time, h, r))
+        print([str(x) for x in harmonic_information])
+        line.append(MusicMoment(current_time, h, r))
 
         current_time += r
 
@@ -75,9 +75,9 @@ def generate_NCs_from_harmonic_shorthand(harmonic_shorthand, key_root = 0):
         else:
             for unit in match.split():
                 if unit == "R":
-                    NCs.append(None)
+                    NCs.append(NoteCollection(set()))
                 else:
-                    NCs.append(parse_shorthand_unit(unit))
+                    NCs.append(NoteCollection({parse_shorthand_unit(unit)}))
 
     return NCs
 

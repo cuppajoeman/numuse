@@ -7,22 +7,16 @@ from constants import JUST_INTONATION_RATIOS, JAZZ_INTERVAL_COLLECTIONS
 class NoteCollection:
     """A collection of notes from a musical system
 
-    Attributes
-    ----------
-    notes: List[int]
-      the notes in this note collection
+    :param notes: The notes in this note collection
+    :type notes: List[int]
 
-    Methods
-    -------
-    __eq__(other_NC: NoteCollection)
-      Checks whether this note collection is the same as the other one
+    :param duration: How long this note collection is held for
+    :type duration: List[int]
 
-    generate_wave_function(self)
-      Generates the wave function determined by the current musical system
-      As of right now this is assumed to be 12 tone equal temperament
+    :param musical_system: The underlying musical system
+    :type musical_system: RBMS_Approximation
 
-    compute_diatonic_distance(self, other_NC: NoteCollection):
-      Return how many notes the two note collections differ by
+    :math:`\\alpha`.
 
     """
 
@@ -43,10 +37,11 @@ class NoteCollection:
         return str(self.notes)
 
     def generate_wave_function(self):
+        """ Generates the wave function determined by the current musical system"""
         raise NotImplementedError
 
     def compute_diatonic_distance(self, other_NC: NoteCollection) -> float:
-        """Return how many notes the two note collections differ by"""
+        """Return how many notes the two note collections differ by dividided by the number of notes it has"""
         raise NotImplementedError
 
 
@@ -58,6 +53,13 @@ class RootedIntervalCollection(NoteCollection):
 
     It does so specifying a note (denoted by root) from the system and
     a set of intervals measured with respect to the root.
+
+    :param root: The root tone
+    :type root: int
+
+    :param intervals: The intervals above the root
+    :type intervals: Set[int]
+
     """
 
     def __init__(
@@ -80,7 +82,17 @@ class RootedIntervalCollection(NoteCollection):
 
     def generate_notes(self, root, interval_collection) -> Set[int]:
         """Generate the notes that are defined by taking the root note and adding
-        the notes in the interval collection"""
+        the notes in the interval collection
+
+        :param root: The root tone
+        :type root: int
+
+        :param intervals: The intervals above the root
+        :type intervals: Set[int]
+
+        :return: A list of notes
+        :rtype: Set[int]
+        """
         return {root + x for x in interval_collection}
 
     def compute_intervallic_complexity(self) -> float:

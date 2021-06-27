@@ -14,8 +14,11 @@ class Music:
 
 class MusicMeasure:
 
-    def __init__(self, m_lines: List[MusicLine]):
+    def __init__(self, m_lines: List[MusicLine], beats_in_a_measure: int = 4, beat_duration: Fraction = 1):
         self.m_lines = m_lines
+        self.beats_in_a_measure = beats_in_a_measure
+        self.beat_duration = beat_duration
+        self.measure_duration = sum(m_l.line_duration for m_l in m_lines)
 
     def __repr__(self):
         return str(self.__class__) + ": " + str(self.__dict__)
@@ -49,6 +52,7 @@ class MusicLine():
 
     def __init__(self, m_moments: List[MusicMoment]):
         self.m_moments = m_moments
+        self.line_duration = sum(m_m.duration for m_m in self.m_moments)
 
     def __repr__(self):
         return str(self.__class__) + ": " + str(self.__dict__)
