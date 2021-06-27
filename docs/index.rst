@@ -18,6 +18,7 @@ To get started with the notation please watch my `introductory video <https://ww
 
    install
    support
+   reference
    abbreviations
 
 
