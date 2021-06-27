@@ -14,6 +14,7 @@
 import sys
 #sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, '../src/')
+# this fixes : https://discord.com/channels/267624335836053506/696348847248769074/858807175538409482 and I have no idea why
 sys.path.insert(0, '../src/numuse')
 
 
