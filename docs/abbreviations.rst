@@ -1,3 +1,4 @@
+.. _Abbrs:
 Abbreviations
 =============
 * RIC: Rooted Interval Collection
