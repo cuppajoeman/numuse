@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2D2D2D" />
+  
+  <title>Numuse :: numuse.notation</title>
+  
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../_static/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../_static/img/favicon-16x16.png">
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+
+  <link rel="stylesheet" href="../../_static/css/insegel.css"/>
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:'',
+        VERSION:'',
+        LANGUAGE:'None',
+        COLLAPSE_INDEX:false,
+        FILE_SUFFIX:'.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+    };
+  </script>
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  <script src="https://email.tl.fortawesome.com/c/eJxNjUEOgyAQAF8jR7Kw6wIHDh7sP1Cw2mgxgmn6-3JsMqc5zEQfE8dkxOY1KKMUOI3ACFKRJpSW2AAp7ontYIaxI6i7XPJVwyeVfCQ550Os3jLrGSNOLgbdAy6s0PBk2TFNjEbsfq31LB0OnX407pJa5v2faRadwSW63mn5KuLyR9j2tgx3zecanl-55R_-jjPs"></script>
+
+</head>
+
+<body>
+  <div id="insegel-container">
+    <header>
+      <div id="logo-container">
+          
+          <a href="../../index.html"><img src="../../_static/numuse_logo_small.png"></a>
+          
+
+      </div>
+      <div id="project-container">
+        <h1>Numuse Documentation</h1>
+      </div>
+    </header>
+
+    <div id="content-container">
+
+      <div id="main-content-container">
+        <div id="main-content-header">
+          <h1>numuse.notation</h1>
+        </div>
+        <div id="main-content">
+          
+  <h1>Source code for numuse.notation</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">from</span> <span class="nn">tools</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="nn">musical_system</span> <span class="kn">import</span> <span class="n">RBMS_Approximation</span>
+<span class="kn">from</span> <span class="nn">constants</span> <span class="kn">import</span> <span class="n">JUST_INTONATION_RATIOS</span><span class="p">,</span> <span class="n">JAZZ_INTERVAL_COLLECTIONS</span>
+
+<span class="sd">&quot;&quot;&quot;Different notations for specifying notes to be played&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="NoteCollection"><a class="viewcode-back" href="../../_autosummary/numuse.notation.NoteCollection.html#numuse.notation.NoteCollection">[docs]</a><span class="k">class</span> <span class="nc">NoteCollection</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A collection of notes from a musical system</span>
+
+<span class="sd">    :param notes: The notes in this note collection</span>
+<span class="sd">    :type notes: List[int]</span>
+
+<span class="sd">    :param duration: How long this note collection is held for</span>
+<span class="sd">    :type duration: List[int]</span>
+
+<span class="sd">    :param musical_system: The underlying musical system</span>
+<span class="sd">    :type musical_system: RBMS_Approximation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="NoteCollection.__init__"><a class="viewcode-back" href="../../_autosummary/numuse.notation.NoteCollection.html#numuse.notation.NoteCollection.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notes</span><span class="p">:</span> <span class="nb">set</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">musical_system</span><span class="o">=</span><span class="n">RBMS_Approximation</span><span class="p">(</span> <span class="mi">440</span><span class="p">,</span> <span class="n">JUST_INTONATION_RATIOS</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">12</span><span class="p">),</span> <span class="mi">12</span><span class="p">)):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notes</span> <span class="o">=</span> <span class="n">notes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="n">duration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">musical_system</span> <span class="o">=</span> <span class="n">musical_system</span></div>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other_NC</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;True if they contain the same notes&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes</span> <span class="o">==</span> <span class="n">other_NC</span><span class="o">.</span><span class="n">notes</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Human readable representation of a note collection&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">)</span>
+
+<div class="viewcode-block" id="NoteCollection.generate_wave_function"><a class="viewcode-back" href="../../_autosummary/numuse.notation.NoteCollection.html#numuse.notation.NoteCollection.generate_wave_function">[docs]</a>    <span class="k">def</span> <span class="nf">generate_wave_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Generates the wave function determined by the current musical system&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<div class="viewcode-block" id="NoteCollection.compute_diatonic_distance"><a class="viewcode-back" href="../../_autosummary/numuse.notation.NoteCollection.html#numuse.notation.NoteCollection.compute_diatonic_distance">[docs]</a>    <span class="k">def</span> <span class="nf">compute_diatonic_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other_NC</span><span class="p">:</span> <span class="n">NoteCollection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return how many notes the two note collections differ by dividided by the number of notes it has&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
+
+
+<div class="viewcode-block" id="RootedIntervalCollection"><a class="viewcode-back" href="../../_autosummary/numuse.notation.RootedIntervalCollection.html#numuse.notation.RootedIntervalCollection">[docs]</a><span class="k">class</span> <span class="nc">RootedIntervalCollection</span><span class="p">(</span><span class="n">NoteCollection</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A note collection instantiated in a special way</span>
+
+<span class="sd">    A rooted interval collection is a way to define a</span>
+<span class="sd">    set of notes of a musical system.</span>
+
+<span class="sd">    It does so specifying a note (denoted by root) from the system and</span>
+<span class="sd">    a set of intervals measured with respect to the root.</span>
+
+<span class="sd">    :param root: The root tone</span>
+<span class="sd">    :type root: int</span>
+
+<span class="sd">    :param intervals: The intervals above the root</span>
+<span class="sd">    :type intervals: Set[int]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="RootedIntervalCollection.__init__"><a class="viewcode-back" href="../../_autosummary/numuse.notation.RootedIntervalCollection.html#numuse.notation.RootedIntervalCollection.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">root</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">interval_collection</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+        <span class="n">duration</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">musical_system</span><span class="o">=</span><span class="n">RBMS_Approximation</span><span class="p">(</span> <span class="mi">440</span><span class="p">,</span> <span class="n">JUST_INTONATION_RATIOS</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">12</span><span class="p">),</span> <span class="mi">12</span><span class="p">)</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        durations is measured in seconds, it is by default set to 0 seconds to represent no duration</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interval_collection</span> <span class="o">=</span> <span class="n">interval_collection</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">generate_notes</span><span class="p">(),</span> <span class="n">duration</span><span class="p">,</span> <span class="n">musical_system</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Human readable representation of a RIC&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; | &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interval_collection</span><span class="p">)</span>
+
+<div class="viewcode-block" id="RootedIntervalCollection.generate_notes"><a class="viewcode-back" href="../../_autosummary/numuse.notation.RootedIntervalCollection.html#numuse.notation.RootedIntervalCollection.generate_notes">[docs]</a>    <span class="k">def</span> <span class="nf">generate_notes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Generate the notes that are defined by taking the root note and adding</span>
+<span class="sd">        the notes in the interval collection</span>
+
+<span class="sd">        :param :py:attr:`~root`: The root tone</span>
+
+<span class="sd">        :param intervals: The intervals above the root</span>
+<span class="sd">        :type intervals: Set[int]</span>
+
+<span class="sd">        :return: A list of notes</span>
+<span class="sd">        :rtype: Set[int]</span>
+
+<span class="sd">        :Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; ric = RootedIntervalCollection(5, {0, 4, 7, 11})</span>
+<span class="sd">        &gt;&gt;&gt; ric.generate_notes()</span>
+<span class="sd">        {5, 9, 0, 11}</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">+</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interval_collection</span><span class="p">}</span></div>
+
+<div class="viewcode-block" id="RootedIntervalCollection.compute_intervallic_complexity"><a class="viewcode-back" href="../../_autosummary/numuse.notation.RootedIntervalCollection.html#numuse.notation.RootedIntervalCollection.compute_intervallic_complexity">[docs]</a>    <span class="k">def</span> <span class="nf">compute_intervallic_complexity</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Computes the intervallic complexity of this rooted interval collection</span>
+
+<span class="sd">        The intervallic complexity of a rooted interval collection is computed</span>
+<span class="sd">        by considering all the possible intervals in the interval collection,</span>
+<span class="sd">        assigning a complexity cost (derived from the ratios that the system approximates)</span>
+<span class="sd">        and then summing all of the complexity costs.</span>
+
+<span class="sd">        For example, if we consider the interval collection {0, 4, 7, 11}, we clearly</span>
+<span class="sd">        have the intervals 0, 4, 7, 11, but additionally between 4 and 7, there is an interval of 3.</span>
+<span class="sd">        and between 4 and 11 there is another interval of 7.</span>
+
+<span class="sd">        :return: The intervallic complexity</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">interval_to_occurance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_interval_to_occurance</span><span class="p">()</span>
+        <span class="n">intervallic_complexity</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">interval</span><span class="p">,</span> <span class="n">occurance</span> <span class="ow">in</span> <span class="n">interval_to_occurance</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1">#ratio = self.musical_system.interval_to_ratio[interval]</span>
+            <span class="c1">#ratio = self.musical_system.interval_to_ratio[interval]</span>
+            <span class="c1">#ratio_complexity = self.musical_system.ratios_to_complexity[ratio] * occurance</span>
+            <span class="n">interval_complexity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">musical_system</span><span class="o">.</span><span class="n">interval_to_complexity</span><span class="p">[</span><span class="n">interval</span><span class="p">]</span> <span class="o">*</span> <span class="n">occurance</span>
+            <span class="n">intervallic_complexity</span> <span class="o">+=</span> <span class="n">interval_complexity</span>
+        <span class="k">return</span> <span class="n">intervallic_complexity</span></div>
+
+<div class="viewcode-block" id="RootedIntervalCollection.generate_interval_to_occurance"><a class="viewcode-back" href="../../_autosummary/numuse.notation.RootedIntervalCollection.html#numuse.notation.RootedIntervalCollection.generate_interval_to_occurance">[docs]</a>    <span class="k">def</span> <span class="nf">generate_interval_to_occurance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Generate a dictionary that maps all possible intervals in this interval collection to the number of times it appears&quot;&quot;&quot;</span>
+        <span class="n">num_intervals</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interval_collection</span><span class="p">)</span>
+        <span class="n">fixed_order_interval_collection</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interval_collection</span><span class="p">))</span>
+        <span class="n">interval_to_occurance</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_intervals</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">num_intervals</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
+                    <span class="n">interval_a</span> <span class="o">=</span> <span class="n">fixed_order_interval_collection</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">interval_b</span> <span class="o">=</span> <span class="n">fixed_order_interval_collection</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="n">interval_between</span> <span class="o">=</span> <span class="n">I</span><span class="p">(</span><span class="n">interval_a</span><span class="p">,</span> <span class="n">interval_b</span><span class="p">)</span>
+                    <span class="n">fundamental_interval_between</span> <span class="o">=</span> <span class="n">ranged_modulus_operator</span><span class="p">(</span>
+                        <span class="n">interval_between</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">musical_system</span><span class="o">.</span><span class="n">num_notes</span>
+                    <span class="p">)</span>
+                    <span class="k">if</span> <span class="n">interval_between</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">interval_to_occurance</span><span class="p">:</span>
+                        <span class="n">interval_to_occurance</span><span class="p">[</span><span class="n">fundamental_interval_between</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">interval_to_occurance</span><span class="p">[</span><span class="n">fundamental_interval_between</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">interval_to_occurance</span></div>
+
+<div class="viewcode-block" id="RootedIntervalCollection.get_fundamental_representation"><a class="viewcode-back" href="../../_autosummary/numuse.notation.RootedIntervalCollection.html#numuse.notation.RootedIntervalCollection.get_fundamental_representation">[docs]</a>    <span class="k">def</span> <span class="nf">get_fundamental_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RootedIntervalCollection</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Generate the fundamental representation of this interval collection</span>
+
+<span class="sd">        The fundamental representation a rooted interval collection where the interval</span>
+<span class="sd">        are within the range 0 ... num_notes - 1 where num_notes is defined by the</span>
+<span class="sd">        musical system we are dealing with.</span>
+
+<span class="sd">        In 12 tone equal temperament, num_notes is equal to 12.</span>
+
+<span class="sd">        For example, if we have a rooted interval collection 13 | -3 1 2 24, then the</span>
+<span class="sd">        fundamental representation would be 1 | 0 1 2 9</span>
+
+<span class="sd">        </span>
+<span class="sd">        :return: The funamental representation of this interavl collection</span>
+<span class="sd">        :rtype: RootedIntervalCollection</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fundamental_interval</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">ranged_modulus_operator</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">musical_system</span><span class="o">.</span><span class="n">num_notes</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interval_collection</span>
+        <span class="p">}</span>
+        <span class="n">fundamental_root</span> <span class="o">=</span> <span class="n">ranged_modulus_operator</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">musical_system</span><span class="o">.</span><span class="n">num_notes</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">RootedIntervalCollection</span><span class="p">(</span><span class="n">fundamental_root</span><span class="p">,</span> <span class="n">fundamental_interval</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="DoubleRootedIntervalCollection"><a class="viewcode-back" href="../../_autosummary/numuse.notation.DoubleRootedIntervalCollection.html#numuse.notation.DoubleRootedIntervalCollection">[docs]</a><span class="k">class</span> <span class="nc">DoubleRootedIntervalCollection</span><span class="p">(</span><span class="n">NoteCollection</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A rooted interval collection where the note in the RIC is an interval above another note&quot;&quot;&quot;</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">C7</span> <span class="o">=</span> <span class="n">RootedIntervalCollection</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">})</span>
+    <span class="k">for</span> <span class="n">interval_collection</span> <span class="ow">in</span> <span class="n">JAZZ_INTERVAL_COLLECTIONS</span><span class="p">:</span>
+        <span class="n">chord</span> <span class="o">=</span> <span class="n">RootedIntervalCollection</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">interval_collection</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">interval_collection</span><span class="p">)</span>
+        <span class="c1">#print(chord.musical_system.ratios_to_complexity)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">chord</span><span class="o">.</span><span class="n">compute_intervallic_complexity</span><span class="p">())</span>
+</pre></div>
+
+        </div>
+      </div>
+
+      <div id="side-menu-container">
+
+        <div id="search" role="search">
+        <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+            <input type="text" name="q" placeholder="Search..." />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+        </form>
+</div>
+
+        <div id="side-menu" role="navigation">
+
+          
+  
+    
+  
+  
+    <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abbreviations.html">Abbreviations</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/numuse.html">numuse</a></li>
+</ul>
+
+  
+
+
+        </div>
+
+        
+
+      </div>
+
+    </div>
+
+<footer>
+    <div id="footer-info">
+        <ul id="build-details">
+            
+
+            
+
+            
+        </ul>
+        <div id="credit">
+            created with <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://github.com/Autophagy/insegel">Insegel</a>
+
+        </div>
+    </div>
+
+    <a id="menu-toggle" class="fa fa-bars" aria-hidden="true"></a>
+
+    <script type="text/javascript">
+      $("#menu-toggle").click(function() {
+        $("#menu-toggle").toggleClass("toggled");
+        $("#side-menu-container").slideToggle(300);
+      });
+    </script>
+
+</footer> 
+
+</div>
+
+</body>
+</html>

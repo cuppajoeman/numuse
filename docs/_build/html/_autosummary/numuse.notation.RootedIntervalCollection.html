@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2D2D2D" />
+  
+  <title>Numuse :: numuse.notation.RootedIntervalCollection</title>
+  
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../_static/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../_static/img/favicon-16x16.png">
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+
+  <link rel="stylesheet" href="../_static/css/insegel.css"/>
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:'',
+        VERSION:'',
+        LANGUAGE:'None',
+        COLLAPSE_INDEX:false,
+        FILE_SUFFIX:'.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+    };
+  </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  <script src="https://email.tl.fortawesome.com/c/eJxNjUEOgyAQAF8jR7Kw6wIHDh7sP1Cw2mgxgmn6-3JsMqc5zEQfE8dkxOY1KKMUOI3ACFKRJpSW2AAp7ontYIaxI6i7XPJVwyeVfCQ550Os3jLrGSNOLgbdAy6s0PBk2TFNjEbsfq31LB0OnX407pJa5v2faRadwSW63mn5KuLyR9j2tgx3zecanl-55R_-jjPs"></script>
+
+</head>
+
+<body>
+  <div id="insegel-container">
+    <header>
+      <div id="logo-container">
+          
+          <a href="../index.html"><img src="../_static/numuse_logo_small.png"></a>
+          
+
+      </div>
+      <div id="project-container">
+        <h1>Numuse Documentation</h1>
+      </div>
+    </header>
+
+    <div id="content-container">
+
+      <div id="main-content-container">
+        <div id="main-content-header">
+          <h1>numuse.notation.RootedIntervalCollection</h1>
+        </div>
+        <div id="main-content">
+          
+  <div class="section" id="numuse-notation-rootedintervalcollection">
+<h1>numuse.notation.RootedIntervalCollection<a class="headerlink" href="#numuse-notation-rootedintervalcollection" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="numuse.notation.RootedIntervalCollection">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">numuse.notation.</span></span><span class="sig-name descname"><span class="pre">RootedIntervalCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">root:</span> <span class="pre">int,</span> <span class="pre">interval_collection:</span> <span class="pre">Set[int],</span> <span class="pre">duration=0,</span> <span class="pre">musical_system=&lt;musical_system.RBMS_Approximation</span> <span class="pre">object&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/numuse/notation.html#RootedIntervalCollection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numuse.notation.RootedIntervalCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="numuse.notation.NoteCollection.html#numuse.notation.NoteCollection" title="numuse.notation.NoteCollection"><code class="xref py py-class docutils literal notranslate"><span class="pre">numuse.notation.NoteCollection</span></code></a></p>
+<p>A note collection instantiated in a special way</p>
+<p>A rooted interval collection is a way to define a
+set of notes of a musical system.</p>
+<p>It does so specifying a note (denoted by root) from the system and
+a set of intervals measured with respect to the root.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>root</strong> (<em>int</em>) – The root tone</p></li>
+<li><p><strong>intervals</strong> (<em>Set</em><em>[</em><em>int</em><em>]</em>) – The intervals above the root</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="numuse.notation.RootedIntervalCollection.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">root:</span> <span class="pre">int,</span> <span class="pre">interval_collection:</span> <span class="pre">Set[int],</span> <span class="pre">duration=0,</span> <span class="pre">musical_system=&lt;musical_system.RBMS_Approximation</span> <span class="pre">object&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/numuse/notation.html#RootedIntervalCollection.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numuse.notation.RootedIntervalCollection.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>durations is measured in seconds, it is by default set to 0 seconds to represent no duration</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#numuse.notation.RootedIntervalCollection.__init__" title="numuse.notation.RootedIntervalCollection.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(root, interval_collection[, …])</p></td>
+<td><p>durations is measured in seconds, it is by default set to 0 seconds to represent no duration</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#numuse.notation.RootedIntervalCollection.compute_diatonic_distance" title="numuse.notation.RootedIntervalCollection.compute_diatonic_distance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_diatonic_distance</span></code></a>(other_NC)</p></td>
+<td><p>Return how many notes the two note collections differ by dividided by the number of notes it has</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#numuse.notation.RootedIntervalCollection.compute_intervallic_complexity" title="numuse.notation.RootedIntervalCollection.compute_intervallic_complexity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_intervallic_complexity</span></code></a>()</p></td>
+<td><p>Computes the intervallic complexity of this rooted interval collection</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#numuse.notation.RootedIntervalCollection.generate_interval_to_occurance" title="numuse.notation.RootedIntervalCollection.generate_interval_to_occurance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_interval_to_occurance</span></code></a>()</p></td>
+<td><p>Generate a dictionary that maps all possible intervals in this interval collection to the number of times it appears</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#numuse.notation.RootedIntervalCollection.generate_notes" title="numuse.notation.RootedIntervalCollection.generate_notes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_notes</span></code></a>()</p></td>
+<td><p>Generate the notes that are defined by taking the root note and adding the notes in the interval collection</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#numuse.notation.RootedIntervalCollection.generate_wave_function" title="numuse.notation.RootedIntervalCollection.generate_wave_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_wave_function</span></code></a>()</p></td>
+<td><p>Generates the wave function determined by the current musical system</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#numuse.notation.RootedIntervalCollection.get_fundamental_representation" title="numuse.notation.RootedIntervalCollection.get_fundamental_representation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_fundamental_representation</span></code></a>()</p></td>
+<td><p>Generate the fundamental representation of this interval collection</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="numuse.notation.RootedIntervalCollection.compute_diatonic_distance">
+<span class="sig-name descname"><span class="pre">compute_diatonic_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other_NC</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="numuse.notation.NoteCollection.html#numuse.notation.NoteCollection" title="numuse.notation.NoteCollection"><span class="pre">numuse.notation.NoteCollection</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#numuse.notation.RootedIntervalCollection.compute_diatonic_distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return how many notes the two note collections differ by dividided by the number of notes it has</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="numuse.notation.RootedIntervalCollection.compute_intervallic_complexity">
+<span class="sig-name descname"><span class="pre">compute_intervallic_complexity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="reference internal" href="../_modules/numuse/notation.html#RootedIntervalCollection.compute_intervallic_complexity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numuse.notation.RootedIntervalCollection.compute_intervallic_complexity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the intervallic complexity of this rooted interval collection</p>
+<p>The intervallic complexity of a rooted interval collection is computed
+by considering all the possible intervals in the interval collection,
+assigning a complexity cost (derived from the ratios that the system approximates)
+and then summing all of the complexity costs.</p>
+<p>For example, if we consider the interval collection {0, 4, 7, 11}, we clearly
+have the intervals 0, 4, 7, 11, but additionally between 4 and 7, there is an interval of 3.
+and between 4 and 11 there is another interval of 7.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The intervallic complexity</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="numuse.notation.RootedIntervalCollection.generate_interval_to_occurance">
+<span class="sig-name descname"><span class="pre">generate_interval_to_occurance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/numuse/notation.html#RootedIntervalCollection.generate_interval_to_occurance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numuse.notation.RootedIntervalCollection.generate_interval_to_occurance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a dictionary that maps all possible intervals in this interval collection to the number of times it appears</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="numuse.notation.RootedIntervalCollection.generate_notes">
+<span class="sig-name descname"><span class="pre">generate_notes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/numuse/notation.html#RootedIntervalCollection.generate_notes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numuse.notation.RootedIntervalCollection.generate_notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the notes that are defined by taking the root note and adding
+the notes in the interval collection</p>
+<p>:param <code class="xref py py-attr docutils literal notranslate"><span class="pre">root</span></code>: The root tone</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>intervals</strong> (<em>Set</em><em>[</em><em>int</em><em>]</em>) – The intervals above the root</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of notes</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Set[int]</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ric</span> <span class="o">=</span> <span class="n">RootedIntervalCollection</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ric</span><span class="o">.</span><span class="n">generate_notes</span><span class="p">()</span>
+<span class="go">{5, 9, 0, 11}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="numuse.notation.RootedIntervalCollection.generate_wave_function">
+<span class="sig-name descname"><span class="pre">generate_wave_function</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#numuse.notation.RootedIntervalCollection.generate_wave_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the wave function determined by the current musical system</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="numuse.notation.RootedIntervalCollection.get_fundamental_representation">
+<span class="sig-name descname"><span class="pre">get_fundamental_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#numuse.notation.RootedIntervalCollection" title="numuse.notation.RootedIntervalCollection"><span class="pre">numuse.notation.RootedIntervalCollection</span></a><a class="reference internal" href="../_modules/numuse/notation.html#RootedIntervalCollection.get_fundamental_representation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numuse.notation.RootedIntervalCollection.get_fundamental_representation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the fundamental representation of this interval collection</p>
+<p>The fundamental representation a rooted interval collection where the interval
+are within the range 0 … num_notes - 1 where num_notes is defined by the
+musical system we are dealing with.</p>
+<p>In 12 tone equal temperament, num_notes is equal to 12.</p>
+<p>For example, if we have a rooted interval collection 13 | -3 1 2 24, then the
+fundamental representation would be 1 | 0 1 2 9</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The funamental representation of this interavl collection</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#numuse.notation.RootedIntervalCollection" title="numuse.notation.RootedIntervalCollection">RootedIntervalCollection</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+        </div>
+      </div>
+
+      <div id="side-menu-container">
+
+        <div id="search" role="search">
+        <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+            <input type="text" name="q" placeholder="Search..." />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+        </form>
+</div>
+
+        <div id="side-menu" role="navigation">
+
+          
+  
+    
+  
+  
+    <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../support.html">Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">Abbreviations</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="numuse.html">numuse</a></li>
+</ul>
+
+  
+
+
+        </div>
+
+        
+
+      </div>
+
+    </div>
+
+<footer>
+    <div id="footer-info">
+        <ul id="build-details">
+            
+                <li class="footer-element">
+                    
+                        <a href="../_sources/_autosummary/numuse.notation.RootedIntervalCollection.rst.txt" rel="nofollow"> source</a>
+                    
+                </li>
+            
+
+            
+
+            
+        </ul>
+        <div id="credit">
+            created with <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://github.com/Autophagy/insegel">Insegel</a>
+
+        </div>
+    </div>
+
+    <a id="menu-toggle" class="fa fa-bars" aria-hidden="true"></a>
+
+    <script type="text/javascript">
+      $("#menu-toggle").click(function() {
+        $("#menu-toggle").toggleClass("toggled");
+        $("#side-menu-container").slideToggle(300);
+      });
+    </script>
+
+</footer> 
+
+</div>
+
+</body>
+</html>

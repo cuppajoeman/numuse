@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2D2D2D" />
+  
+  <title>Numuse :: numuse.music</title>
+  
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../_static/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../_static/img/favicon-16x16.png">
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+
+  <link rel="stylesheet" href="../../_static/css/insegel.css"/>
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:'',
+        VERSION:'',
+        LANGUAGE:'None',
+        COLLAPSE_INDEX:false,
+        FILE_SUFFIX:'.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+    };
+  </script>
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  <script src="https://email.tl.fortawesome.com/c/eJxNjUEOgyAQAF8jR7Kw6wIHDh7sP1Cw2mgxgmn6-3JsMqc5zEQfE8dkxOY1KKMUOI3ACFKRJpSW2AAp7ontYIaxI6i7XPJVwyeVfCQ550Os3jLrGSNOLgbdAy6s0PBk2TFNjEbsfq31LB0OnX407pJa5v2faRadwSW63mn5KuLyR9j2tgx3zecanl-55R_-jjPs"></script>
+
+</head>
+
+<body>
+  <div id="insegel-container">
+    <header>
+      <div id="logo-container">
+          
+          <a href="../../index.html"><img src="../../_static/numuse_logo_small.png"></a>
+          
+
+      </div>
+      <div id="project-container">
+        <h1>Numuse Documentation</h1>
+      </div>
+    </header>
+
+    <div id="content-container">
+
+      <div id="main-content-container">
+        <div id="main-content-header">
+          <h1>numuse.music</h1>
+        </div>
+        <div id="main-content">
+          
+  <h1>Source code for numuse.music</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
+
+<span class="kn">from</span> <span class="nn">notation</span> <span class="kn">import</span> <span class="n">NoteCollection</span>
+
+<div class="viewcode-block" id="Music"><a class="viewcode-back" href="../../_autosummary/numuse.music.Music.html#numuse.music.Music">[docs]</a><span class="k">class</span> <span class="nc">Music</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Represents notes that are played over time&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Music.__init__"><a class="viewcode-back" href="../../_autosummary/numuse.music.Music.html#numuse.music.Music.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">measures</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MusicMeasure</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measures</span> <span class="o">=</span> <span class="n">measures</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MusicMeasure"><a class="viewcode-back" href="../../_autosummary/numuse.music.MusicMeasure.html#numuse.music.MusicMeasure">[docs]</a><span class="k">class</span> <span class="nc">MusicMeasure</span><span class="p">:</span>
+
+<div class="viewcode-block" id="MusicMeasure.__init__"><a class="viewcode-back" href="../../_autosummary/numuse.music.MusicMeasure.html#numuse.music.MusicMeasure.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m_lines</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MusicLine</span><span class="p">],</span> <span class="n">beats_in_a_measure</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">beat_duration</span><span class="p">:</span> <span class="n">Fraction</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_lines</span> <span class="o">=</span> <span class="n">m_lines</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beats_in_a_measure</span> <span class="o">=</span> <span class="n">beats_in_a_measure</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beat_duration</span> <span class="o">=</span> <span class="n">beat_duration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measure_duration</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">m_l</span><span class="o">.</span><span class="n">line_duration</span> <span class="k">for</span> <span class="n">m_l</span> <span class="ow">in</span> <span class="n">m_lines</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MusicMoment"><a class="viewcode-back" href="../../_autosummary/numuse.music.MusicMoment.html#numuse.music.MusicMoment">[docs]</a><span class="k">class</span> <span class="nc">MusicMoment</span><span class="p">:</span>
+<div class="viewcode-block" id="MusicMoment.__init__"><a class="viewcode-back" href="../../_autosummary/numuse.music.MusicMoment.html#numuse.music.MusicMoment.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">notes</span><span class="p">:</span> <span class="n">NoteCollection</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="n">Fraction</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notes</span> <span class="o">=</span> <span class="n">notes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="n">duration</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Notes: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="si">}</span><span class="s2">, Held for: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="si">}</span><span class="s2">, At time: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MusicLine"><a class="viewcode-back" href="../../_autosummary/numuse.music.MusicLine.html#numuse.music.MusicLine">[docs]</a><span class="k">class</span> <span class="nc">MusicLine</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Due to the way we write music notes follow consecutively</span>
+
+<span class="sd">    In order to write ideas like this:</span>
+
+<span class="sd">    Note 1: ==========================</span>
+<span class="sd">    Note 2:         ========</span>
+
+<span class="sd">    Then one solution is to have two different clefs</span>
+
+<span class="sd">    This class represents such a clef</span>
+
+<span class="sd">    Note this is required because of the way we notate things sequentially in music</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="MusicLine.__init__"><a class="viewcode-back" href="../../_autosummary/numuse.music.MusicLine.html#numuse.music.MusicLine.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m_moments</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MusicMoment</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_moments</span> <span class="o">=</span> <span class="n">m_moments</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">line_duration</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">m_m</span><span class="o">.</span><span class="n">duration</span> <span class="k">for</span> <span class="n">m_m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_moments</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StructuredMusic"><a class="viewcode-back" href="../../_autosummary/numuse.music.StructuredMusic.html#numuse.music.StructuredMusic">[docs]</a><span class="k">class</span> <span class="nc">StructuredMusic</span><span class="p">(</span><span class="n">Music</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Represents notes played over time that are related to an underlying structure</span>
+
+<span class="sd">    In this case the structure is a set of notes which have a higher probability of being</span>
+<span class="sd">    played than other notes.</span>
+
+<span class="sd">    The structure is a note collection and can be specified using a RIC</span>
+
+<span class="sd">    music_data is now allowed to use a special type of syntax on top of the previous method</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+</pre></div>
+
+        </div>
+      </div>
+
+      <div id="side-menu-container">
+
+        <div id="search" role="search">
+        <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+            <input type="text" name="q" placeholder="Search..." />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+        </form>
+</div>
+
+        <div id="side-menu" role="navigation">
+
+          
+  
+    
+  
+  
+    <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abbreviations.html">Abbreviations</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/numuse.html">numuse</a></li>
+</ul>
+
+  
+
+
+        </div>
+
+        
+
+      </div>
+
+    </div>
+
+<footer>
+    <div id="footer-info">
+        <ul id="build-details">
+            
+
+            
+
+            
+        </ul>
+        <div id="credit">
+            created with <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://github.com/Autophagy/insegel">Insegel</a>
+
+        </div>
+    </div>
+
+    <a id="menu-toggle" class="fa fa-bars" aria-hidden="true"></a>
+
+    <script type="text/javascript">
+      $("#menu-toggle").click(function() {
+        $("#menu-toggle").toggleClass("toggled");
+        $("#side-menu-container").slideToggle(300);
+      });
+    </script>
+
+</footer> 
+
+</div>
+
+</body>
+</html>

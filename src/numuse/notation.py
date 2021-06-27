@@ -73,7 +73,7 @@ class RootedIntervalCollection(NoteCollection):
         """
         self.root = root
         self.interval_collection = interval_collection
-        super().__init__(self.generate_notes(self.root, self.interval_collection), duration, musical_system)
+        super().__init__(self.generate_notes(), duration, musical_system)
 
     def __str__(self):
         """Human readable representation of a RIC"""
