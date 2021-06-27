@@ -1,12 +1,14 @@
-Reference Manual
-================
 
-.. warning:: The pages linked to here are currently a work in progress.
+PROJECT
+=======
 
-.. currentmodule:: numuse
+.. toctree::
 
 .. autosummary::
+   :toctree: _autosummary
    notation
+   converters
+
 
 
 
