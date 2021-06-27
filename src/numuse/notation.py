@@ -92,10 +92,31 @@ class RootedIntervalCollection(NoteCollection):
 
         :return: A list of notes
         :rtype: Set[int]
+
+        :Example:
+
+        >>> ric = RootedIntervalCollection(5, {0, 4, 7, 11})
+        >>> ric.generate_notes()
+        {5, 9, 0, 11}
+
         """
-        return {root + x for x in interval_collection}
+        return {self.root + x for x in self.interval_collection}
 
     def compute_intervallic_complexity(self) -> float:
+        """Computes the intervallic complexity of this rooted interval collection
+
+        The intervallic complexity of a rooted interval collection is computed
+        by considering all the possible intervals in the interval collection,
+        assigning a complexity cost (derived from the ratios that the system approximates)
+        and then summing all of the complexity costs.
+
+        For example, if we consider the interval collection {0, 4, 7, 11}, we clearly
+        have the intervals 0, 4, 7, 11, but additionally between 4 and 7, there is an interval of 3.
+        and between 4 and 11 there is another interval of 7.
+
+        :return: The intervallic complexity
+        :rtype: float
+        """
         interval_to_occurance = self.generate_interval_to_occurance()
         intervallic_complexity = 0
         for interval, occurance in interval_to_occurance.items():
@@ -135,9 +156,12 @@ class RootedIntervalCollection(NoteCollection):
 
         In 12 tone equal temperament, num_notes is equal to 12.
 
-        Example:
-            If we have a rooted interval collection 13 | -3 1 2 24
+        For example, if we have a rooted interval collection 13 | -3 1 2 24, then the
+        fundamental representation would be 1 | 0 1 2 9
 
+        
+        :return: The funamental representation of this interavl collection
+        :rtype: RootedIntervalCollection
         """
         fundamental_interval = {
             ranged_modulus_operator(i, self.musical_system.num_notes)
