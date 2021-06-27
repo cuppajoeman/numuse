@@ -6,8 +6,7 @@ Reference Manual
 .. currentmodule:: numuse
 
 .. autosummary::
-        :toctree: _autosummary
-        :recursive:
+   notation
 
 
 
