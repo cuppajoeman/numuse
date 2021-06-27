@@ -17,9 +17,6 @@ class NoteCollection:
 
     :param musical_system: The underlying musical system
     :type musical_system: RBMS_Approximation
-
-    :math:`\\alpha`.
-
     """
 
     def __init__(self, notes: set, duration=0, musical_system=RBMS_Approximation( 440, JUST_INTONATION_RATIOS, 2, 2 ** (1 / 12), 12)):
@@ -82,12 +79,11 @@ class RootedIntervalCollection(NoteCollection):
         """Human readable representation of a RIC"""
         return str(self.root) + " | " + str(self.interval_collection)
 
-    def generate_notes(self, root, interval_collection) -> Set[int]:
+    def generate_notes(self) -> Set[int]:
         """Generate the notes that are defined by taking the root note and adding
         the notes in the interval collection
 
-        :param root: The root tone
-        :type root: int
+        :param :py:attr:`~root`: The root tone
 
         :param intervals: The intervals above the root
         :type intervals: Set[int]

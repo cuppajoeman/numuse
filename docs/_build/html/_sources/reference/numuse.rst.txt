@@ -2,7 +2,7 @@
 ======
 
 .. automodule:: numuse
-
+  
    
    
    
@@ -25,6 +25,7 @@
 
 .. autosummary::
    :toctree:
+   :template: custom-module-template.rst                 
    :recursive:
 
    numuse.constants
@@ -34,4 +35,5 @@
    numuse.notation
    numuse.setup
    numuse.tools
+
 

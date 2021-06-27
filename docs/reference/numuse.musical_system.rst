@@ -2,7 +2,7 @@ numuse.musical\_system
 ======================
 
 .. automodule:: numuse.musical_system
-
+  
    
    
    
@@ -16,6 +16,8 @@ numuse.musical\_system
    .. rubric:: Classes
 
    .. autosummary::
+      :toctree:                                          
+      :template: custom-class-template.rst               
    
       RBMS_Approximation
       RatioBasedMusicSystem
@@ -25,6 +27,7 @@ numuse.musical\_system
    
    
    
+
 
 
 
