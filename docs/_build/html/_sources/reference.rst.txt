@@ -1,12 +1,11 @@
-
-PROJECT
+test
 =======
 
-.. toctree::
-
 .. autosummary::
-
-   tools.I
+   :toctree: reference
+   :recursive:
+   
+   numuse
 
 
 
