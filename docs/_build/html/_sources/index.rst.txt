@@ -22,59 +22,6 @@ To get started with the notation please watch my `introductory video <https://ww
    abbreviations
 
 
-Reference Manual
-================
-
-.. warning:: The pages linked to here are currently a work in progress.
-
-   
-********
-Notation
-********
-
-.. automodule:: notation
-   :members:
-
-
-**************
-Musical System
-**************
-
-.. automodule:: musical_system
-   :members:
-
-
-*****
-Music
-*****
-
-.. automodule:: music
-   :members:
-
-
-
-**********
-Converters
-**********
-
-.. automodule:: converters
-   :members:
-
-
-*********
-Constants
-*********
-
-.. automodule:: converters
-   :members:
-
-
-*****
-Tools
-*****
-
-.. automodule:: tools
-   :members:
 
 
 Indices and tables
