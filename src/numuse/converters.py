@@ -7,41 +7,50 @@ from notation import RootedIntervalCollection, NoteCollection
 from music import MusicMoment, MusicLine, MusicMeasure, Music
 
 
-def parse_music(music_data: List[List[Tuple[str, List[Fraction]]]]):
-    """Converts a musical line into music_data input
+def parse_music(music_shorthand: List[List[Tuple[str, List[Fraction]]]]):
+    """Converts hand-written music into Music (see `Abbrs`_)
 
+    :param music_shorthand: Music written in shorthand
+    :type music_shorthand: List[List[Tuple[str, List[Fraction]]]]
 
-    The input format is like this:
+    :return: Music which can be easily analyzed
+    :rtype: Music
 
+    :Example:
 
-    [ # a list of measures
-        [ # a measure, which is defined to be a list of lines
-            [ # a line, which is contains the musical information
-                (harmonic_information_shorthand, rhythmic information)
-            ]
-        ]
-
-    ]
-
+    >>> idea = [
+    ...     [("0' 4' 7' 11' R", [tt, t, tt, t+b, b])], [("R 7' 4' 7' 7'", [tt, t, tt, t + b, b])],
+    ...     [("9' 6' R", [b + tt, t + b, b])], [("6' 2' 9' 6' 0'' 9' R",[tt, t, tt, t, tt, t, b])],
+    ...     ["(4 | 0 3 7 10) (9 | 0 3 7 10)",[2*b, 2*b])], [("(2 | 0 4 7 10)",[4*b])], [("(7 | 0 4 7 11)", [4*b])],
+    ...     ["(4 7 11 2) (9 0 4 7)",[2*b, 2*b])], [("(2 6 9 0)",[4*b])], [("(7 11 2 6)", [4*b])],
+    ...     ["<9 | 0 3 7 10> <2 | 0 3 7 10>",[2*b, 2*b])], [("<7 | 0 4 7 10>",[4*b])], [("<0 | 0 4 7 11>", [4*b])],
+    ...     ["<9 0 4 7> <2 5 9 0>",[2*b, 2*b])], [("<7 11 2 5>",[4*b])], [("<0 4 7 11>", [4*b])]
+    ... ]
+    >>> parse_music(idea)
     """
     measures = []
     current_time = 0
-    for measure in music_data:
+    for measure in music_shorthand:
         music_lines = []
         for line_shorthand in measure:
             new_time, line = parse_line_shorthand(current_time, line_shorthand)
             current_time = new_time
             music_lines.append(MusicLine(line))
         measures.append(MusicMeasure(music_lines))
-    return measures
+    return Music(measures)
 
 
-def parse_line_shorthand(current_time: float, line_shorthand: Tuple[str, List[Fraction]]):
+def parse_line_shorthand(
+    current_time: float, line_shorthand: Tuple[str, List[Fraction]]
+):
+    """Converts a handwritten line into a line (see `Abbrs`_)"""
     line = []
     # Rhythm information is the duration of the harmonic information
     harmonic_information_shorthand, rhythm_information = line_shorthand
     # This means that they have to have the same size
-    harmonic_information = generate_NCs_from_harmonic_shorthand(harmonic_information_shorthand)
+    harmonic_information = generate_NCs_from_harmonic_shorthand(
+        harmonic_information_shorthand
+    )
     h_to_r = zip(harmonic_information, rhythm_information)
     for h, r in h_to_r:
         # If h is none, than it's a rest
@@ -54,15 +63,31 @@ def parse_line_shorthand(current_time: float, line_shorthand: Tuple[str, List[Fr
     return new_time, line
 
 
-def generate_NCs_from_harmonic_shorthand(harmonic_shorthand, key_root = 0):
+def generate_NCs_from_harmonic_shorthand(
+    harmonic_shorthand: str, key_root: int = 0
+) -> List[NoteCollection]:
+    """Converts handwritten harmonic shorthand into a list of note collections
+
+
+    :param harmonic_shorthand: Harmonic information written by a human
+    :type harmonic_shorthand: str
+
+    :param key_root: The current keys root
+    :type key_root: int
+
+    :return: A list of note collections
+    :rtype: List[NoteCollection]
+    """
     NCs = []
     matches = re.findall(
-        '\[[^\]]*\]|\([^\)]*\)|"[^"]*"|\<[^\>]*\>|\S+', harmonic_shorthand 
+        '\[[^\]]*\]|\([^\)]*\)|"[^"]*"|\<[^\>]*\>|\S+', harmonic_shorthand
     )
     for match in matches:
         if match[0] == "<":
             if is_RIC_notation(match):
-                NCs.append(RootedIntervalCollection(*parse_KRIC_shorthand(match, key_root)))
+                NCs.append(
+                    RootedIntervalCollection(*parse_KRIC_shorthand(match, key_root))
+                )
             else:
                 middle = re.findall("\<(.*?)\>", match)[0]
                 NCs.append(NoteCollection(add_key_to_notes(middle, key_root)))
@@ -80,7 +105,6 @@ def generate_NCs_from_harmonic_shorthand(harmonic_shorthand, key_root = 0):
                     NCs.append(NoteCollection({parse_shorthand_unit(unit)}))
 
     return NCs
-
 
 
 def parse_KRIC_shorthand(KRIC_shorthand: str, key_root: int) -> Tuple[int, Set[int]]:
@@ -130,50 +154,53 @@ def get_notes(str_notes):
 def add_key_to_notes(str_notes, key_root):
     return {n + key_root for n in get_notes(str_notes)}
 
+
 if __name__ == "__main __":
     b = 1
     # half
-    h = 1/2
+    h = 1 / 2
     # thirds
     t = Fraction(b, 3)
     # two thirds
     tt = 2 * t
 
     jens_solo_arps = [
-        [("0' 4' 7' 11' R", [tt, t, tt, t+b, b])], [("R 7' 4' 7' 7'", [tt, t, tt, t + b, b])],
-        [("9' 6' R", [b + tt, t + b, b])], [("6' 2' 9' 6' 0'' 9' R",[tt, t, tt, t, tt, t, b])],
-
+        [("0' 4' 7' 11' R", [tt, t, tt, t + b, b])],
+        [("R 7' 4' 7' 7'", [tt, t, tt, t + b, b])],
+        [("9' 6' R", [b + tt, t + b, b])],
+        [("6' 2' 9' 6' 0'' 9' R", [tt, t, tt, t, tt, t, b])],
         [("5' 2' 9' 0'' 5'", [tt, t, tt, t + b, b])],
         [("2' 7 11 2' 5' 2' R", [tt, t, tt, t, tt, t, b])],
-        [("4' 4' 4' 0'",  [b, tt, t + b, b])],
+        [("4' 4' 4' 0'", [b, tt, t + b, b])],
         [("11 7 11 2' 5' 2' R", [tt, t, tt, t, tt, t, b])],
-
-        [("4' 0' R 4' R 4' R 4'",[tt, t, tt, t, tt, t, tt, t])], [("7' 4' 7' 7' R 11'", [tt, t, tt, t, 1 + tt, t])],
-        [("0'' 0'' 9' R 9' 6'", [b, tt, t, tt, t, b])], [( "R 2' 2' 2' R",[ b, b, tt, t, b])],
-
+        [("4' 0' R 4' R 4' R 4'", [tt, t, tt, t, tt, t, tt, t])],
+        [("7' 4' 7' 7' R 11'", [tt, t, tt, t, 1 + tt, t])],
+        [("0'' 0'' 9' R 9' 6'", [b, tt, t, tt, t, b])],
+        [("R 2' 2' 2' R", [b, b, tt, t, b])],
         [("0'' 0'' 9' R 9' 5'", [b, tt, t, tt, t, b])],
         [("R 2' 11 5' 2' 11 7", [b, tt, t, tt, t, tt, t])],
         [("4' 0' R 4' 0' R", [tt, t, tt, t, b, b])],
         [("7' 4' 7' 10' R", [tt, t, tt, t + b, b])],
-        
-        [("R 9 0' 9 0' 9",[b, b, tt, t, tt, t])], [("5 9 0' 4' R",[tt, t, tt, t + b, b])], [( "R 0' 4' 0' R",[b, b, tt, t, b])], [("9 0' 5 R", [b, tt, t + b, b])],
-
-        [("2' R 0'' 6' 9' 6'",[b, b, tt, t, tt, t])], [( "0'' 0'' 9' R",[b, tt, t + b, b])],
+        [("R 9 0' 9 0' 9", [b, b, tt, t, tt, t])],
+        [("5 9 0' 4' R", [tt, t, tt, t + b, b])],
+        [("R 0' 4' 0' R", [b, b, tt, t, b])],
+        [("9 0' 5 R", [b, tt, t + b, b])],
+        [("2' R 0'' 6' 9' 6'", [b, b, tt, t, tt, t])],
+        [("0'' 0'' 9' R", [b, tt, t + b, b])],
         [("9' R 9' 2' 5' 2'", [b, b, tt, t, tt, t])],
         [("11 11 2' R", [b, tt, t + b, b])],
-        
-        [("4' 0' 7' 0' R 4' 7' 11'", [tt, t, tt, t, tt, t, tt, t+b])],[("7' 11' R", [tt, t + b, b])],
-        [("6' 2' 9' 2' R 9'", [tt, t, tt, t, b, b])],[("0'' 6' R 9' R",[tt, t, tt, t + b, b])],
-
+        [("4' 0' 7' 0' R 4' 7' 11'", [tt, t, tt, t, tt, t, tt, t + b])],
+        [("7' 11' R", [tt, t + b, b])],
+        [("6' 2' 9' 2' R 9'", [tt, t, tt, t, b, b])],
+        [("0'' 6' R 9' R", [tt, t, tt, t + b, b])],
         [("9' 2' R 5' 2'", [tt, t, tt, t + b, b])],
         [("5' 11 R 2' 5'", [tt, t, tt, t + b, b])],
         [("4' 0' 7' 4' 7' 11'", [tt, t, tt, t, tt, t + b])],
         [("R", [4 * b])],
     ]
 
-    m = Music(parse_music(jens_solo_arps))
+    m = parse_music(jens_solo_arps)
     for measure in m.measures:
         for line in measure.m_lines:
             for moment in line.m_moments:
                 print(moment)
-

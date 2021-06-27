@@ -4,17 +4,24 @@ from fractions import Fraction
 
 from notation import NoteCollection
 
+
 class Music:
     """Represents notes that are played over time"""
+
     def __init__(self, measures: List[MusicMeasure]):
         self.measures = measures
 
     def __repr__(self):
         return str(self.__class__) + ": " + str(self.__dict__)
 
-class MusicMeasure:
 
-    def __init__(self, m_lines: List[MusicLine], beats_in_a_measure: int = 4, beat_duration: Fraction = 1):
+class MusicMeasure:
+    def __init__(
+        self,
+        m_lines: List[MusicLine],
+        beats_in_a_measure: int = 4,
+        beat_duration: Fraction = 1,
+    ):
         self.m_lines = m_lines
         self.beats_in_a_measure = beats_in_a_measure
         self.beat_duration = beat_duration
@@ -22,6 +29,7 @@ class MusicMeasure:
 
     def __repr__(self):
         return str(self.__class__) + ": " + str(self.__dict__)
+
 
 class MusicMoment:
     def __init__(self, time: float, notes: NoteCollection, duration: Fraction):
@@ -35,7 +43,8 @@ class MusicMoment:
     def __repr__(self):
         return str(self.__class__) + ": " + str(self.__dict__)
 
-class MusicLine():
+
+class MusicLine:
     """Due to the way we write music notes follow consecutively
 
     In order to write ideas like this:
@@ -69,6 +78,5 @@ class StructuredMusic(Music):
     music_data is now allowed to use a special type of syntax on top of the previous method
 
     """
+
     pass
-
-

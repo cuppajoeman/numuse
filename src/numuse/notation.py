@@ -1,10 +1,11 @@
+"""Different notations for specifying notes to be played"""
+
 from __future__ import annotations
 from tools import *
 from typing import Set, Dict
 from musical_system import RBMS_Approximation
 from constants import JUST_INTONATION_RATIOS, JAZZ_INTERVAL_COLLECTIONS
 
-"""Different notations for specifying notes to be played"""
 
 class NoteCollection:
     """A collection of notes from a musical system
@@ -19,7 +20,14 @@ class NoteCollection:
     :type musical_system: RBMS_Approximation
     """
 
-    def __init__(self, notes: set, duration=0, musical_system=RBMS_Approximation( 440, JUST_INTONATION_RATIOS, 2, 2 ** (1 / 12), 12)):
+    def __init__(
+        self,
+        notes: set,
+        duration=0,
+        musical_system=RBMS_Approximation(
+            440, JUST_INTONATION_RATIOS, 2, 2 ** (1 / 12), 12
+        ),
+    ):
         self.notes = notes
         self.duration = duration
         self.musical_system = musical_system
@@ -36,7 +44,7 @@ class NoteCollection:
         return str(self.notes)
 
     def generate_wave_function(self):
-        """ Generates the wave function determined by the current musical system"""
+        """Generates the wave function determined by the current musical system"""
         raise NotImplementedError
 
     def compute_diatonic_distance(self, other_NC: NoteCollection) -> float:
@@ -66,7 +74,9 @@ class RootedIntervalCollection(NoteCollection):
         root: int,
         interval_collection: Set[int],
         duration=0,
-        musical_system=RBMS_Approximation( 440, JUST_INTONATION_RATIOS, 2, 2 ** (1 / 12), 12)
+        musical_system=RBMS_Approximation(
+            440, JUST_INTONATION_RATIOS, 2, 2 ** (1 / 12), 12
+        ),
     ):
         """
         durations is measured in seconds, it is by default set to 0 seconds to represent no duration
@@ -115,21 +125,27 @@ class RootedIntervalCollection(NoteCollection):
         :return: The intervallic complexity
         :rtype: float
         """
-        interval_to_occurance = self.generate_interval_to_occurance()
+        interval_to_occurence = self.generate_interval_to_occurence()
         intervallic_complexity = 0
-        for interval, occurance in interval_to_occurance.items():
-            #ratio = self.musical_system.interval_to_ratio[interval]
-            #ratio = self.musical_system.interval_to_ratio[interval]
-            #ratio_complexity = self.musical_system.ratios_to_complexity[ratio] * occurance
-            interval_complexity = self.musical_system.interval_to_complexity[interval] * occurance
+        for interval, occurence in interval_to_occurence.items():
+            # ratio = self.musical_system.interval_to_ratio[interval]
+            # ratio = self.musical_system.interval_to_ratio[interval]
+            # ratio_complexity = self.musical_system.ratios_to_complexity[ratio] * occurence
+            interval_complexity = (
+                self.musical_system.interval_to_complexity[interval] * occurence
+            )
             intervallic_complexity += interval_complexity
         return intervallic_complexity
 
-    def generate_interval_to_occurance(self) -> Dict[int, int]:
-        """Generate a dictionary that maps all possible intervals in this interval collection to the number of times it appears"""
+    def generate_interval_to_occurence(self) -> Dict[int, int]:
+        """Generate a dictionary that maps all possible intervals in this interval collection to the number of times it appears
+
+        :return: A dictionary mapping intervals to occurence
+        :rtype: Dict[int, int]
+        """
         num_intervals = len(self.interval_collection)
         fixed_order_interval_collection = sorted(list(self.interval_collection))
-        interval_to_occurance = {}
+        interval_to_occurence = {}
         for i in range(num_intervals):
             for j in range(i, num_intervals):
                 if i < j:
@@ -139,11 +155,11 @@ class RootedIntervalCollection(NoteCollection):
                     fundamental_interval_between = ranged_modulus_operator(
                         interval_between, self.musical_system.num_notes
                     )
-                    if interval_between not in interval_to_occurance:
-                        interval_to_occurance[fundamental_interval_between] = 1
+                    if interval_between not in interval_to_occurence:
+                        interval_to_occurence[fundamental_interval_between] = 1
                     else:
-                        interval_to_occurance[fundamental_interval_between] += 1
-        return interval_to_occurance
+                        interval_to_occurence[fundamental_interval_between] += 1
+        return interval_to_occurence
 
     def get_fundamental_representation(self) -> RootedIntervalCollection:
         """Generate the fundamental representation of this interval collection
@@ -157,7 +173,6 @@ class RootedIntervalCollection(NoteCollection):
         For example, if we have a rooted interval collection 13 | -3 1 2 24, then the
         fundamental representation would be 1 | 0 1 2 9
 
-        
         :return: The funamental representation of this interavl collection
         :rtype: RootedIntervalCollection
         """
@@ -170,8 +185,11 @@ class RootedIntervalCollection(NoteCollection):
         )
         return RootedIntervalCollection(fundamental_root, fundamental_interval)
 
+
 class DoubleRootedIntervalCollection(NoteCollection):
     """A rooted interval collection where the note in the RIC is an interval above another note"""
+
+    pass
 
 
 if __name__ == "__main__":
@@ -179,5 +197,5 @@ if __name__ == "__main__":
     for interval_collection in JAZZ_INTERVAL_COLLECTIONS:
         chord = RootedIntervalCollection(0, interval_collection)
         print(interval_collection)
-        #print(chord.musical_system.ratios_to_complexity)
+        # print(chord.musical_system.ratios_to_complexity)
         print(chord.compute_intervallic_complexity())
