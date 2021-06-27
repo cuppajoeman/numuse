@@ -4,6 +4,8 @@ from typing import Set, Dict
 from musical_system import RBMS_Approximation
 from constants import JUST_INTONATION_RATIOS, JAZZ_INTERVAL_COLLECTIONS
 
+"""Different notations for specifying notes to be played"""
+
 class NoteCollection:
     """A collection of notes from a musical system
 
