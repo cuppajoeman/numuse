@@ -16,7 +16,7 @@ def I(x: int,y: int) -> int:
     """
     return y - x
 
-def ranged_modulus_operator(x: int, m: int) -> int:
+def ranged_modulus_operator(x: int, m: int = 12) -> int:
     """Return what x is congruent to in the range 0 ... m-1
 
     Parameters

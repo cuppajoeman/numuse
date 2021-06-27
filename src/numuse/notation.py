@@ -26,12 +26,21 @@ class NoteCollection:
 
     """
 
-    def __init__(self, notes: set):
+    def __init__(self, notes: set, duration=0, musical_system=RBMS_Approximation( 440, JUST_INTONATION_RATIOS, 2, 2 ** (1 / 12), 12)):
         self.notes = notes
+        self.duration = duration
+        self.musical_system = musical_system
 
     def __eq__(self, other_NC):
         """True if they contain the same notes"""
         return self.notes == other_NC.notes
+
+    def __repr__(self):
+        return str(self.__class__) + ": " + str(self.__dict__)
+
+    def __str__(self):
+        """Human readable representation of a note collection"""
+        return str(self.notes)
 
     def generate_wave_function(self):
         raise NotImplementedError
@@ -56,17 +65,18 @@ class RootedIntervalCollection(NoteCollection):
         root: int,
         interval_collection: Set[int],
         duration=0,
-        musical_system=RBMS_Approximation(
-            440, JUST_INTONATION_RATIOS, 2, 2 ** (1 / 12), 12
-        ),
+        musical_system=RBMS_Approximation( 440, JUST_INTONATION_RATIOS, 2, 2 ** (1 / 12), 12)
     ):
         """
         durations is measured in seconds, it is by default set to 0 seconds to represent no duration
         """
-        self.musical_system = musical_system
         self.root = root
         self.interval_collection = interval_collection
-        super().__init__(self.generate_notes(self.root, self.interval_collection))
+        super().__init__(self.generate_notes(self.root, self.interval_collection), duration, musical_system)
+
+    def __str__(self):
+        """Human readable representation of a RIC"""
+        return str(self.root) + " | " + str(self.interval_collection)
 
     def generate_notes(self, root, interval_collection) -> Set[int]:
         """Generate the notes that are defined by taking the root note and adding
@@ -125,6 +135,9 @@ class RootedIntervalCollection(NoteCollection):
             self.root, self.musical_system.num_notes
         )
         return RootedIntervalCollection(fundamental_root, fundamental_interval)
+
+class DoubleRootedIntervalCollection(NoteCollection):
+    """A rooted interval collection where the note in the RIC is an interval above another note"""
 
 
 if __name__ == "__main__":

@@ -1,26 +1,70 @@
+from __future__ import annotations
 from typing import List, Tuple
 from fractions import Fraction
 
+from notation import NoteCollection
+
 class Music:
     """Represents notes that are played over time"""
-    def __init__(self, music_data: List[Tuple[List[int], List[Fraction]]]):
-        self.music_data = music_data
+    def __init__(self, measures: List[MusicMeasure]):
+        self.measures = measures
 
-    def generate_song_points(self):
-        """Generates points of the form (moment, note(s)??, duration)
+    def __repr__(self):
+        return str(self.__class__) + ": " + str(self.__dict__)
 
-        TODO: make this work for chords too
+class MusicMeasure:
 
-        """
-        current_time = 0
-        song_points = []
-        for measure in self.music_data:
-            notes, rhythms = measure
-            note_to_rhythm = zip(notes, rhythms)
-            for n, r in note_to_rhythm:
-                if n is not None:
-                    # This defines the format
-                    song_points.append((current_time, n, r))
-                current_time += r
-        return song_points
+    def __init__(self, m_lines: List[MusicLine]):
+        self.m_lines = m_lines
+
+    def __repr__(self):
+        return str(self.__class__) + ": " + str(self.__dict__)
+
+class MusicMoment:
+    def __init__(self, time: float, notes: NoteCollection, duration: Fraction):
+        self.time = time
+        self.notes = notes
+        self.duration = duration
+
+    def __str__(self):
+        return f"Notes: {self.notes}, Held for: {self.duration}, At time: {self.time}"
+
+    def __repr__(self):
+        return str(self.__class__) + ": " + str(self.__dict__)
+
+class MusicLine():
+    """Due to the way we write music notes follow consecutively
+
+    In order to write ideas like this:
+
+    Note 1: ==========================
+    Note 2:         ========
+
+    Then one solution is to have two different clefs
+
+    This class represents such a clef
+
+    Note this is required because of the way we notate things sequentially in music
+    """
+
+    def __init__(self, m_moments: List[MusicMoment]):
+        self.m_moments = m_moments
+
+    def __repr__(self):
+        return str(self.__class__) + ": " + str(self.__dict__)
+
+
+class StructuredMusic(Music):
+    """Represents notes played over time that are related to an underlying structure
+
+    In this case the structure is a set of notes which have a higher probability of being
+    played than other notes.
+
+    The structure is a note collection and can be specified using a RIC
+
+    music_data is now allowed to use a special type of syntax on top of the previous method
+
+    """
+    pass
+
 
