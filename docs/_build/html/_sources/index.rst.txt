@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Numuse's documentation!
+Welcome to Numuse's documentation!!
 ==================================
 
 Wecome to Numuse, this is a package for analyzing musical ideas and testing out conjectures about what makes certain ideas sound good.
@@ -21,9 +21,9 @@ To get started with the notation please watch my `introductory video <https://ww
    abbreviations
 
 
-
+****************
 Reference Manual
-================
+****************
 
 .. autosummary::
    :toctree: _autosummary
@@ -33,9 +33,9 @@ Reference Manual
    numuse
 
 
-
+******************
 Indices and tables
-==================
+******************
 
 * :ref:`genindex`
 * :ref:`modindex`
