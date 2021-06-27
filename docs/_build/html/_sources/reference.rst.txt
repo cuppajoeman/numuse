@@ -6,6 +6,7 @@ PROJECT
 
 .. autosummary::
    :toctree: _autosummary
+
    notation
    converters
 
