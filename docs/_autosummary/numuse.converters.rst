@@ -1,4 +1,4 @@
-﻿numuse.converters
+numuse.converters
 =================
 
 .. automodule:: numuse.converters

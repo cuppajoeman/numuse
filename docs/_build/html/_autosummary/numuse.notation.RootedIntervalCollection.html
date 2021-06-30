@@ -61,7 +61,7 @@
 <h1>numuse.notation.RootedIntervalCollection<a class="headerlink" href="#numuse-notation-rootedintervalcollection" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="numuse.notation.RootedIntervalCollection">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">numuse.notation.</span></span><span class="sig-name descname"><span class="pre">RootedIntervalCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">root:</span> <span class="pre">int,</span> <span class="pre">interval_collection:</span> <span class="pre">Set[int],</span> <span class="pre">duration=0,</span> <span class="pre">musical_system=&lt;musical_system.RBMS_Approximation</span> <span class="pre">object&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/numuse/notation.html#RootedIntervalCollection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numuse.notation.RootedIntervalCollection" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">numuse.notation.</span></span><span class="sig-name descname"><span class="pre">RootedIntervalCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">root:</span> <span class="pre">numuse.notation.Note,</span> <span class="pre">interval_collection:</span> <span class="pre">Set[int],</span> <span class="pre">duration=0,</span> <span class="pre">musical_system=&lt;numuse.musical_system.RBMS_Approximation</span> <span class="pre">object&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/numuse/notation.html#RootedIntervalCollection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numuse.notation.RootedIntervalCollection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="numuse.notation.NoteCollection.html#numuse.notation.NoteCollection" title="numuse.notation.NoteCollection"><code class="xref py py-class docutils literal notranslate"><span class="pre">numuse.notation.NoteCollection</span></code></a></p>
 <p>A note collection instantiated in a special way</p>
 <p>A rooted interval collection is a way to define a
@@ -78,7 +78,7 @@ a set of intervals measured with respect to the root.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="numuse.notation.RootedIntervalCollection.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">root:</span> <span class="pre">int,</span> <span class="pre">interval_collection:</span> <span class="pre">Set[int],</span> <span class="pre">duration=0,</span> <span class="pre">musical_system=&lt;musical_system.RBMS_Approximation</span> <span class="pre">object&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/numuse/notation.html#RootedIntervalCollection.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numuse.notation.RootedIntervalCollection.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">root:</span> <span class="pre">numuse.notation.Note,</span> <span class="pre">interval_collection:</span> <span class="pre">Set[int],</span> <span class="pre">duration=0,</span> <span class="pre">musical_system=&lt;numuse.musical_system.RBMS_Approximation</span> <span class="pre">object&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/numuse/notation.html#RootedIntervalCollection.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numuse.notation.RootedIntervalCollection.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>durations is measured in seconds, it is by default set to 0 seconds to represent no duration</p>
 </dd></dl>
 
@@ -98,7 +98,7 @@ a set of intervals measured with respect to the root.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#numuse.notation.RootedIntervalCollection.compute_intervallic_complexity" title="numuse.notation.RootedIntervalCollection.compute_intervallic_complexity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_intervallic_complexity</span></code></a>()</p></td>
 <td><p>Computes the intervallic complexity of this rooted interval collection</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#numuse.notation.RootedIntervalCollection.generate_interval_to_occurance" title="numuse.notation.RootedIntervalCollection.generate_interval_to_occurance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_interval_to_occurance</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#numuse.notation.RootedIntervalCollection.generate_interval_to_occurence" title="numuse.notation.RootedIntervalCollection.generate_interval_to_occurence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_interval_to_occurence</span></code></a>()</p></td>
 <td><p>Generate a dictionary that maps all possible intervals in this interval collection to the number of times it appears</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#numuse.notation.RootedIntervalCollection.generate_notes" title="numuse.notation.RootedIntervalCollection.generate_notes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_notes</span></code></a>()</p></td>
@@ -140,14 +140,22 @@ and between 4 and 11 there is another interval of 7.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="numuse.notation.RootedIntervalCollection.generate_interval_to_occurance">
-<span class="sig-name descname"><span class="pre">generate_interval_to_occurance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/numuse/notation.html#RootedIntervalCollection.generate_interval_to_occurance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numuse.notation.RootedIntervalCollection.generate_interval_to_occurance" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="numuse.notation.RootedIntervalCollection.generate_interval_to_occurence">
+<span class="sig-name descname"><span class="pre">generate_interval_to_occurence</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/numuse/notation.html#RootedIntervalCollection.generate_interval_to_occurence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numuse.notation.RootedIntervalCollection.generate_interval_to_occurence" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a dictionary that maps all possible intervals in this interval collection to the number of times it appears</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dictionary mapping intervals to occurence</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Dict[int, int]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="numuse.notation.RootedIntervalCollection.generate_notes">
-<span class="sig-name descname"><span class="pre">generate_notes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/numuse/notation.html#RootedIntervalCollection.generate_notes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numuse.notation.RootedIntervalCollection.generate_notes" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">generate_notes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Set</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="numuse.notation.Note.html#numuse.notation.Note" title="numuse.notation.Note"><span class="pre">numuse.notation.Note</span></a><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/numuse/notation.html#RootedIntervalCollection.generate_notes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numuse.notation.RootedIntervalCollection.generate_notes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate the notes that are defined by taking the root note and adding
 the notes in the interval collection</p>
 <p>:param <code class="xref py py-attr docutils literal notranslate"><span class="pre">root</span></code>: The root tone</p>
@@ -166,7 +174,7 @@ the notes in the interval collection</p>
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ric</span> <span class="o">=</span> <span class="n">RootedIntervalCollection</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ric</span><span class="o">.</span><span class="n">generate_notes</span><span class="p">()</span>
-<span class="go">{5, 9, 0, 11}</span>
+<span class="go">TODO</span>
 </pre></div>
 </div>
 </dd></dl>

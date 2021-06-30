@@ -1,4 +1,4 @@
-﻿numuse.music
+numuse.music
 ============
 
 .. automodule:: numuse.music

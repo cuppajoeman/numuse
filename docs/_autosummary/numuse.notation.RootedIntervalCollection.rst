@@ -19,7 +19,7 @@ numuse.notation.RootedIntervalCollection
       ~RootedIntervalCollection.__init__
       ~RootedIntervalCollection.compute_diatonic_distance
       ~RootedIntervalCollection.compute_intervallic_complexity
-      ~RootedIntervalCollection.generate_interval_to_occurance
+      ~RootedIntervalCollection.generate_interval_to_occurence
       ~RootedIntervalCollection.generate_notes
       ~RootedIntervalCollection.generate_wave_function
       ~RootedIntervalCollection.get_fundamental_representation

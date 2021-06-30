@@ -33,7 +33,6 @@
    numuse.music
    numuse.musical_system
    numuse.notation
-   numuse.setup
    numuse.tools
 
 

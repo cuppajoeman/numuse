@@ -1,71 +1,15 @@
-from tools import ranged_modulus_operator
+from __future__ import annotations
+from .tools import ranged_modulus_operator
 import re
 import pprint
-from typing import Tuple, Set, List, Optional
+from typing import Tuple, Set, List, Callable, Type
 from fractions import Fraction
-from notation import RootedIntervalCollection, NoteCollection
-from music import MusicMoment, MusicLine, MusicMeasure, Music
-
-
-def parse_music(music_shorthand: List[List[Tuple[str, List[Fraction]]]]):
-    """Converts hand-written music into Music (see `Abbrs`_)
-
-    :param music_shorthand: Music written in shorthand
-    :type music_shorthand: List[List[Tuple[str, List[Fraction]]]]
-
-    :return: Music which can be easily analyzed
-    :rtype: Music
-
-    :Example:
-
-    >>> idea = [
-    ...     [("0' 4' 7' 11' R", [tt, t, tt, t+b, b])], [("R 7' 4' 7' 7'", [tt, t, tt, t + b, b])],
-    ...     [("9' 6' R", [b + tt, t + b, b])], [("6' 2' 9' 6' 0'' 9' R",[tt, t, tt, t, tt, t, b])],
-    ...     ["(4 | 0 3 7 10) (9 | 0 3 7 10)",[2*b, 2*b])], [("(2 | 0 4 7 10)",[4*b])], [("(7 | 0 4 7 11)", [4*b])],
-    ...     ["(4 7 11 2) (9 0 4 7)",[2*b, 2*b])], [("(2 6 9 0)",[4*b])], [("(7 11 2 6)", [4*b])],
-    ...     ["<9 | 0 3 7 10> <2 | 0 3 7 10>",[2*b, 2*b])], [("<7 | 0 4 7 10>",[4*b])], [("<0 | 0 4 7 11>", [4*b])],
-    ...     ["<9 0 4 7> <2 5 9 0>",[2*b, 2*b])], [("<7 11 2 5>",[4*b])], [("<0 4 7 11>", [4*b])]
-    ... ]
-    >>> parse_music(idea)
-    """
-    measures = []
-    current_time = 0
-    for measure in music_shorthand:
-        music_lines = []
-        for line_shorthand in measure:
-            new_time, line = parse_line_shorthand(current_time, line_shorthand)
-            current_time = new_time
-            music_lines.append(MusicLine(line))
-        measures.append(MusicMeasure(music_lines))
-    return Music(measures)
-
-
-def parse_line_shorthand(
-    current_time: float, line_shorthand: Tuple[str, List[Fraction]]
-):
-    """Converts a handwritten line into a line (see `Abbrs`_)"""
-    line = []
-    # Rhythm information is the duration of the harmonic information
-    harmonic_information_shorthand, rhythm_information = line_shorthand
-    # This means that they have to have the same size
-    harmonic_information = generate_NCs_from_harmonic_shorthand(
-        harmonic_information_shorthand
-    )
-    h_to_r = zip(harmonic_information, rhythm_information)
-    for h, r in h_to_r:
-        # If h is none, than it's a rest
-        print([str(x) for x in harmonic_information])
-        line.append(MusicMoment(current_time, h, r))
-
-        current_time += r
-
-    new_time = current_time
-    return new_time, line
-
+from .notation import RootedIntervalCollection, NoteCollection, Note
+from .music import MusicMoment, MusicLine, MusicMeasure, Music
 
 def generate_NCs_from_harmonic_shorthand(
     harmonic_shorthand: str, key_root: int = 0
-) -> List[NoteCollection]:
+) -> List[Type[NoteCollection]]:
     """Converts handwritten harmonic shorthand into a list of note collections
 
 
@@ -102,21 +46,89 @@ def generate_NCs_from_harmonic_shorthand(
                 if unit == "R":
                     NCs.append(NoteCollection(set()))
                 else:
-                    NCs.append(NoteCollection({parse_shorthand_unit(unit)}))
+                    NCs.append(NoteCollection({Note(parse_shorthand_unit(unit))}))
 
     return NCs
 
 
-def parse_KRIC_shorthand(KRIC_shorthand: str, key_root: int) -> Tuple[int, Set[int]]:
+def parse_music(music_shorthand: List[List[Tuple[str, List[Fraction]]]],
+    harmonic_information_shorthand_parser: Callable[
+        [str], List[Type[NoteCollection]]
+        ] = generate_NCs_from_harmonic_shorthand):
+    """Converts hand-written music into Music (see `Abbrs`_)
+
+    :param music_shorthand: Music written in shorthand
+    :type music_shorthand: List[List[Tuple[str, List[Fraction]]]]
+
+    :return: Music which can be easily analyzed
+    :rtype: Music
+
+    :Example:
+
+    >>> idea = [
+    ...     [("0' 4' 7' 11' R", [tt, t, tt, t+b, b])], [("R 7' 4' 7' 7'", [tt, t, tt, t + b, b])],
+    ...     [("9' 6' R", [b + tt, t + b, b])], [("6' 2' 9' 6' 0'' 9' R",[tt, t, tt, t, tt, t, b])],
+    ...     ["(4 | 0 3 7 10) (9 | 0 3 7 10)",[2*b, 2*b])], [("(2 | 0 4 7 10)",[4*b])], [("(7 | 0 4 7 11)", [4*b])],
+    ...     ["(4 7 11 2) (9 0 4 7)",[2*b, 2*b])], [("(2 6 9 0)",[4*b])], [("(7 11 2 6)", [4*b])],
+    ...     ["<9 | 0 3 7 10> <2 | 0 3 7 10>",[2*b, 2*b])], [("<7 | 0 4 7 10>",[4*b])], [("<0 | 0 4 7 11>", [4*b])],
+    ...     ["<9 0 4 7> <2 5 9 0>",[2*b, 2*b])], [("<7 11 2 5>",[4*b])], [("<0 4 7 11>", [4*b])]
+    ... ]
+    >>> parse_music(idea)
+    """
+    measures = []
+    current_time = 0
+    for measure in music_shorthand:
+        music_lines = []
+        for line_shorthand in measure:
+            new_time, line = parse_line_shorthand(current_time, line_shorthand, harmonic_information_shorthand_parser)
+            current_time = new_time
+            music_lines.append(MusicLine(line))
+        measures.append(MusicMeasure(music_lines))
+    return Music(measures)
+
+
+def parse_line_shorthand(
+    current_time: float,
+    line_shorthand: Tuple[str, List[Fraction]],
+    harmonic_information_shorthand_parser: Callable[
+        [str], List[NoteCollection]
+    ] = generate_NCs_from_harmonic_shorthand,
+):
+    """Converts a handwritten line into a line (see `Abbrs`_)
+
+    You can pass in your own harmonic information parser because we are not tied to having a single way to represent the harmonic information,
+    We are currently tied to the overall structure of a string and a list of
+
+    """
+    line = []
+    # Rhythm information is the duration of the harmonic information
+    harmonic_information_shorthand, rhythm_information = line_shorthand
+    # This means that they have to have the same size
+    harmonic_information = harmonic_information_shorthand_parser(
+        harmonic_information_shorthand
+    )
+    h_to_r = zip(harmonic_information, rhythm_information)
+    for h, r in h_to_r:
+        # If h is none, than it's a rest
+        #print([str(x) for x in harmonic_information])
+        line.append(MusicMoment(current_time, h, r))
+
+        current_time += r
+
+    new_time = current_time
+    return new_time, line
+
+
+def parse_KRIC_shorthand(KRIC_shorthand: str, key_root: int) -> Tuple[Note, Set[int]]:
     """Converts KRIC shorthand to a root and set of NCs"""
     root, intervals = parse_RIC_shorthand(KRIC_shorthand)
-    return key_root + root, intervals
+    return root + key_root, intervals
 
 
-def parse_RIC_shorthand(RIC_shorthand: str) -> Tuple[int, Set[int]]:
+def parse_RIC_shorthand(RIC_shorthand: str) -> Tuple[Note, Set[int]]:
     """Converts RIC shorthand to a root and set of NCs"""
     str_root, str_intervals = RIC_shorthand.split("|")
-    root = int(str_root)
+    root = Note(int(str_root))
     intervals = {parse_shorthand_unit(unit) for unit in str_intervals.split(" ")}
     return root, intervals
 
@@ -147,15 +159,16 @@ def is_RIC_notation(notation):
     return "|" in notation
 
 
-def get_notes(str_notes):
-    return {parse_shorthand_unit(unit) for unit in str_notes.split(" ")}
+def get_notes(str_notes) -> Set[Note]:
+    return {Note(parse_shorthand_unit(unit)) for unit in str_notes.split(" ")}
 
 
 def add_key_to_notes(str_notes, key_root):
     return {n + key_root for n in get_notes(str_notes)}
 
 
-if __name__ == "__main __":
+if __name__ == "__main__":
+    #print("got in")
     b = 1
     # half
     h = 1 / 2

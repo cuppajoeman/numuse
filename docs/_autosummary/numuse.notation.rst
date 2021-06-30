@@ -1,4 +1,4 @@
-﻿numuse.notation
+numuse.notation
 ===============
 
 .. automodule:: numuse.notation
@@ -20,6 +20,7 @@
       :template: custom-class-template.rst               
    
       DoubleRootedIntervalCollection
+      Note
       NoteCollection
       RootedIntervalCollection
    
