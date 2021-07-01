@@ -5,7 +5,7 @@ import pprint
 from typing import Tuple, Set, List, Callable, Type
 from fractions import Fraction
 from .notation import RootedIntervalCollection, NoteCollection, Note
-from .music import MusicMoment, MusicLine, MusicMeasure, Music
+from .music import Moment, Line, Measure, Music
 
 def generate_NCs_from_harmonic_shorthand(
     harmonic_shorthand: str, key_root: int = 0
@@ -24,7 +24,7 @@ def generate_NCs_from_harmonic_shorthand(
     """
     NCs = []
     matches = re.findall(
-        '\[[^\]]*\]|\([^\)]*\)|"[^"]*"|\<[^\>]*\>|\S+', harmonic_shorthand
+        r'\[[^\]]*\]|\([^\)]*\)|"[^"]*"|\<[^\>]*\>|\S+', harmonic_shorthand
     )
     for match in matches:
         if match[0] == "<":
@@ -33,13 +33,13 @@ def generate_NCs_from_harmonic_shorthand(
                     RootedIntervalCollection(*parse_KRIC_shorthand(match, key_root))
                 )
             else:
-                middle = re.findall("\<(.*?)\>", match)[0]
+                middle = re.findall(r"\<(.*?)\>", match)[0]
                 NCs.append(NoteCollection(add_key_to_notes(middle, key_root)))
         elif match[0] == "(":
             if is_RIC_notation(match):
                 NCs.append(RootedIntervalCollection(*parse_RIC_shorthand(match)))
             else:
-                middle = re.findall("\((.*?)\)", match)[0]
+                middle = re.findall(r"\((.*?)\)", match)[0]
                 NCs.append(NoteCollection(get_notes(middle)))
         else:
             for unit in match.split():
@@ -51,7 +51,7 @@ def generate_NCs_from_harmonic_shorthand(
     return NCs
 
 
-def parse_music(music_shorthand: List[List[Tuple[str, List[Fraction]]]],
+def parse_music_measures(music_shorthand: List[List[Tuple[str, List[Fraction]]]],
     harmonic_information_shorthand_parser: Callable[
         [str], List[Type[NoteCollection]]
         ] = generate_NCs_from_harmonic_shorthand):
@@ -82,9 +82,9 @@ def parse_music(music_shorthand: List[List[Tuple[str, List[Fraction]]]],
         for line_shorthand in measure:
             new_time, line = parse_line_shorthand(current_time, line_shorthand, harmonic_information_shorthand_parser)
             current_time = new_time
-            music_lines.append(MusicLine(line))
-        measures.append(MusicMeasure(music_lines))
-    return Music(measures)
+            music_lines.append(Line(line))
+        measures.append(Measure(music_lines))
+    return measures
 
 
 def parse_line_shorthand(
@@ -111,7 +111,7 @@ def parse_line_shorthand(
     for h, r in h_to_r:
         # If h is none, than it's a rest
         #print([str(x) for x in harmonic_information])
-        line.append(MusicMoment(current_time, h, r))
+        line.append(Moment(current_time, h, r))
 
         current_time += r
 
